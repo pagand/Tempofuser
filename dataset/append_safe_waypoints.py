@@ -71,8 +71,9 @@ for weather in dirs:
             dic = _load_json(path)
             dic["safe_waypoints"] = safe_waypoints.tolist()
 
-            path ="./test.json"
             file_handler = open(path, "w")
             json.dump(dic, file_handler, indent=4)
             file_handler.close()
+
+print('Successful')
 
