@@ -5,3 +5,4 @@ DecisionTransformer/
 output/
 results/
 wandb/
+dataset/*.txt
