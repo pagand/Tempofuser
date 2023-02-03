@@ -1409,6 +1409,7 @@ def train_one_epoch(
             loss_waypoints = loss_fns["waypoints"](output[1], target[1])
             loss_junction = loss_fns["cls"](output[2], target[2])
             loss_htmap = loss_fns["htmap"](output[6],target[7]) # loss related to tempral obstacle heatmap
+            # target[8] safe waypoints
             on_road_mask = target[2] < 0.5
             loss_traffic_light_state = loss_fns["cls"](
                 output[3], target[3]

@@ -301,16 +301,16 @@ class CarlaMVDetDataset(BaseIODataset):
 
 
         future_safe_waypoints = []
-        for i in range(min(10, len(measurements["future_waypoints"]))):
-            waypoint = measurements["future_waypoints"][i]
+        for i in range(min(10, len(measurements["safe_waypoints"]))):
+            waypoint = measurements["safe_waypoints"][i]
             new_loc = R.T.dot(np.array([waypoint[0] - ego_x, waypoint[1] - ego_y]))
-            command_waypoints.append(new_loc.reshape(1, 2))
-        for i in range(10 - len(command_waypoints)):
-            command_waypoints.append(np.array([10000, 10000]).reshape(1, 2))
-        command_waypoints = np.concatenate(command_waypoints)
-        if np.isnan(command_waypoints).any():
-            command_waypoints[np.isnan(command_waypoints)] = 0
-        command_waypoints = torch.from_numpy(command_waypoints).float()
+            future_safe_waypoints.append(new_loc.reshape(1, 2))
+        for i in range(10 - len(future_safe_waypoints)):
+            future_safe_waypoints.append(np.array([10000, 10000]).reshape(1, 2))
+        future_safe_waypoints = np.concatenate(future_safe_waypoints)
+        if np.isnan(future_safe_waypoints).any():
+            future_safe_waypoints[np.isnan(future_safe_waypoints)] = 0
+        future_safe_waypoints = torch.from_numpy(future_safe_waypoints).float()
 
         if self.rgb_transform is not None:
             rgb_main_image = self.rgb_transform(rgb_image)
