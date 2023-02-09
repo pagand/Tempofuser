@@ -665,6 +665,10 @@ class Interfuser(nn.Module):
         self.end2end = end2end
         self.use_view_embed = use_view_embed
 
+        # add for the perception
+        self.multihead_attn = nn.MultiheadAttention(embed_dim = embed_dim, num_heads = num_heads, dropout=dropout)
+
+
         if self.direct_concat:
             in_chans = in_chans * 4
             self.with_center_sensor = False
